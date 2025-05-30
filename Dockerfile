@@ -19,7 +19,7 @@ RUN pip install --no-cache-dir torch==2.1.2 torchvision torchaudio --index-url h
 # Install dependencies
 RUN pip install --no-cache-dir \
     runpod \
-    transformers==4.36.2 \
+    transformers==4.39.0 \
     datasets \
     accelerate \
     scipy \
