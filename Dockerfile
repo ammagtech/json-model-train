@@ -13,13 +13,13 @@ RUN pip install --no-cache-dir --upgrade pip
 # Working directory
 WORKDIR /app
 
-# Install PyTorch with CUDA 12.6
+# Install PyTorch with CUDA 11.8
 RUN pip install --no-cache-dir torch==2.1.2 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 
-# Install dependencies
+# Install dependencies (Update accelerate here!)
 RUN pip install --no-cache-dir \
     runpod \
-    transformers==4.39.0 \
+    transformers \
     datasets \
     accelerate \
     scipy \
