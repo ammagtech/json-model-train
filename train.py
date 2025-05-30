@@ -8,7 +8,7 @@ def train_model():
     model = AutoModelForCausalLM.from_pretrained(model_name, trust_remote_code=True).cuda()
 
     # Dummy dataset (replace with your real JSON dataset)
-    train_dataset = load_dataset("json", data_files="data/train.json", split="train")
+    train_dataset = load_dataset("json", data_files="data/train.jsonl", split="train")
 
     def preprocess(examples):
         return tokenizer(examples["prompt"], truncation=True, padding="max_length", max_length=512)
