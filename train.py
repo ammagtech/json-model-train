@@ -7,11 +7,13 @@ def train_model():
     tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
     model = AutoModelForCausalLM.from_pretrained(model_name, trust_remote_code=True).cuda()
 
-    # Dummy dataset (replace with your real JSON dataset)
+    # Load your real JSON dataset
     train_dataset = load_dataset("json", data_files="data/train.jsonl", split="train")
 
     def preprocess(examples):
-        return tokenizer(examples["prompt"], truncation=True, padding="max_length", max_length=512)
+        # *** CHANGE THIS LINE ***
+        # Use 'input' instead of 'prompt' to match your dataset structure
+        return tokenizer(examples["input"], truncation=True, padding="max_length", max_length=512)
 
     tokenized = train_dataset.map(preprocess, batched=True)
 
@@ -30,8 +32,11 @@ def train_model():
         tokenizer=tokenizer,
     )
 
+    print("Starting training...")
     trainer.train()
+    print("Training finished. Saving model...")
     trainer.save_model("output_model")
     tokenizer.save_pretrained("output_model")
+    print("Model and tokenizer saved to 'output_model'.")
 
     return "Training completed and model saved."
